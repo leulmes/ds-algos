@@ -8,6 +8,7 @@ def bf_traverse(adj_lst):
     order = [0]
     queue = [0]
 
+    # while the queue is not empty
     while queue:
         vertex = queue.pop(0)
         vertices = adj_lst[vertex] 
@@ -22,8 +23,6 @@ def bf_traverse(adj_lst):
     
     return order
 
-
-
-
+# using an adjacency list to store my graphs
 print(bf_traverse([[1, 2], [0, 2], [0, 1, 3], [2]]))
 
