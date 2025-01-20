@@ -1,4 +1,5 @@
 
+# demo for BFT and BFS
 # assuming graph vertices start with 0
 # 0 is False, 1 is True
 def bf_traverse(adj_lst):
