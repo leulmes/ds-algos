@@ -1,14 +1,20 @@
+/*
+ * Implemented on 2/22/2025
+ * Solved solution, passes all release tests on Neetcode Pro
+ * My main issue was that my tail pointer did not point the last element in the array,
+ * this caused indexing errors. 
+ */
 class DynamicArray {
     private int[] arr;
     private int capacity;
     private int size;
-    private int currIdx;
+    private int tail;
 
     public DynamicArray(int capacity) {
         this.arr = new int[capacity];
         this.capacity = capacity;
         this.size = 0;
-        this.currIdx = 0;
+        this.tail = -1;
     }
 
     public int get(int i) {
@@ -20,31 +26,30 @@ class DynamicArray {
     }
 
     public void pushback(int n) {
-        if (this.size == capacity) {
+        if (this.size == this.capacity) {
             resize();
         }
-        this.arr[currIdx] = n;
+        this.tail++;
+        this.arr[this.tail] = n;
         this.size++;
-        this.currIdx++;
     }
 
     public int popback() {
-        int lastElt = this.arr[this.currIdx];
-        this.arr[currIdx] = 0;
-        this.currIdx--;
+        int lastElt = this.arr[this.tail];
+        this.tail--;
         this.size--;
         return lastElt;
     }
 
     private void resize() {
-        capacity *= 2;
+        this.capacity *= 2;
         int[] doubled = new int[capacity];
         int i;
-        for (i = 0; i < arr.length; i++) {
-            doubled[i] = arr[i];
+        for (i = 0; i < this.arr.length; i++) {
+            doubled[i] = this.arr[i];
         }
-        arr = doubled;
-        currIdx = i;
+        this.arr = doubled;
+        this.tail = i - 1; // tail points to last elt in arr
     }
 
     public int getSize() {
@@ -52,6 +57,6 @@ class DynamicArray {
     }
 
     public int getCapacity() {
-        return capacity;
+        return this.capacity;
     }
 }
