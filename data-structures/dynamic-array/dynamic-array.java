@@ -1,17 +1,14 @@
-/* Implemented this on 2/21/2025
- * Completed the Dynamic Array
- * challenge on Neetcode Pro
- * */
-
 class DynamicArray {
     private int[] arr;
     private int capacity;
     private int size;
+    private int currIdx;
 
     public DynamicArray(int capacity) {
         this.arr = new int[capacity];
         this.capacity = capacity;
         this.size = 0;
+        this.currIdx = 0;
     }
 
     public int get(int i) {
@@ -23,16 +20,18 @@ class DynamicArray {
     }
 
     public void pushback(int n) {
-        if (this.size == this.arr.length) {
+        if (this.size == capacity) {
             resize();
         }
-        this.arr[this.arr.length - 1] = n;
+        this.arr[currIdx] = n;
         this.size++;
+        this.currIdx++;
     }
 
     public int popback() {
-        int lastElt = this.arr[this.arr.length - 1];
-        this.arr[arr.length - 1] = 0;
+        int lastElt = this.arr[this.currIdx];
+        this.arr[currIdx] = 0;
+        this.currIdx--;
         this.size--;
         return lastElt;
     }
@@ -40,10 +39,12 @@ class DynamicArray {
     private void resize() {
         capacity *= 2;
         int[] doubled = new int[capacity];
-        for (int i = 0; i < arr.length; i++) {
+        int i;
+        for (i = 0; i < arr.length; i++) {
             doubled[i] = arr[i];
         }
         arr = doubled;
+        currIdx = i;
     }
 
     public int getSize() {
