@@ -1,42 +1,42 @@
-
-
 # merge sort algorithm
-def merge_sort(lst):
-    # base case: if len(lst) == 1, we return lst
-    if len(lst) > 1:
-        # recursive case: keep halving list (split into left and right subarray)
-        N = len(lst)
-        left_arr = lst[:(N // 2)]
-        right_arr = lst[(N // 2):]
+# sort left
+# sort right
+# merge
+# rounding trick: -(-(numerator) // denominator) rounds a number up
+# this works b/c -(numerator) // denominator rounds a number to negative infinity, which is like rounding up in our case when we negate that result
+def merge_sort(arr):
+    if len(arr) > 1:
+        left_subarray = arr[:len(arr) // 2]
+        right_subarray = arr[len(arr) // 2:]
 
-        merge_sort(left_arr) # left subarray
-        merge_sort(right_arr) # right subarray
+        # sort left
+        merge_sort(left_subarray)
+        merge_sort(right_subarray)
 
         # merge step
-        l, r, i = 0, 0, 0
-        while l < len(left_arr) and r < len(right_arr):
-            if left_arr[l] > right_arr[r]:
-                lst[i] = right_arr[r]
-                r += 1
+        ls_ptr, rs_ptr, idx = 0, 0, 0
+        while ls_ptr < len(left_subarray) and rs_ptr < len(right_subarray):
+            if left_subarray[ls_ptr] < right_subarray[rs_ptr]:
+                arr[idx] = left_subarray[ls_ptr]
+                ls_ptr += 1
+                idx += 1
             else:
-                lst[i] = left_arr[l]
-                l += 1
-            i += 1
+                arr[idx] = right_subarray[rs_ptr]
+                rs_ptr += 1
+                idx += 1
         
-        # left list is exhausted before right list, add all elts of right list
-        while r < len(right_arr):
-            lst[i] = right_arr[r]
-            r += 1
-            i += 1
-    
-        # right list is exhausted before left list, add all elts of left list
-        while l < len(left_arr):
-            lst[i] = left_arr[l]
-            l += 1
-            i += 1
-        
-    return lst 
+        while ls_ptr < len(left_subarray):
+            arr[idx] = left_subarray[ls_ptr]
+            ls_ptr += 1
+            idx += 1
 
+        while rs_ptr < len(right_subarray):
+            arr[idx] = right_subarray[rs_ptr]
+            rs_ptr += 1
+            idx += 1
 
-print(merge_sort([5, 2, 1, 3, 6, 4]))
-print(merge_sort([7, 8, 1, 0, 3, 2, 5, 8, 4, 9, 6]))
+    return arr
+
+print(merge_sort([2, 6, 5, 1, 7, 4, 3]))
+# print(merge_sort([5, 2, 1, 3, 6, 4]))
+# print(merge_sort([7, 8, 1, 0, 3, 2, 5, 8, 4, 9, 6]))
