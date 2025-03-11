@@ -1,19 +1,20 @@
 
-def selection_sort(nums):
-    N = len(nums)
+def find_min_idx(start, arr):
+    min_idx = start
+    N = len(arr)
 
+    for i in range(start, N):
+        if arr[i] < arr[min_idx]:
+            min_idx= i
+    
+    return min_idx
+
+def selection_sort(arr):
+    N = len(arr)
     for i in range(N):
-        min = nums[i]
-        idx = i
-        for j in range(i, N):
-            if nums[j] < min:
-                min = nums[j]
-                idx = j
-        
-        tmp = nums[i]
-        print('min: ', min)
-        nums[i] = min
-        nums[idx] = tmp
-    return nums
+        min_idx = find_min_idx(i, arr)
+        arr[i], arr[min_idx] = arr[min_idx], arr[i] #swap
+    return arr
+
 
 print(selection_sort([4, 3, 2, 4, 1]))
