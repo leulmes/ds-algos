@@ -1,11 +1,16 @@
 
-def insertion_sort(arr):
-    N = len(arr)
+
+def insertion_sort(lst):
+    N = len(lst)
+    currElt = 0
+
     for i in range(1, N):
-       j = i
-       while arr[j - 1] > arr[j] and j > 0:
-           arr[j - 1], arr[j] = arr[j], arr[j - 1]
-           j -= 1
-    return arr
+        j = i
+        currElt = lst[i]
+        while j >= 1 and lst[j - 1] >= currElt:
+            lst[j] = lst[j - 1]
+            j -= 1
+        lst[j] = currElt
+    return lst
         
 print(insertion_sort([7, 2, 4, 1, 5, 3]))
