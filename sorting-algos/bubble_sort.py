@@ -1,27 +1,22 @@
-def swap(lst, x, y):
-    tmp = lst[x]
-    lst[x] = lst[y]
-    lst[y] = tmp
 
-def bubble_sort(nums):
-    N = len(nums)
-    for i in range(N):
-        for j in range(0, N - 1):
-            if nums[j] > nums[j + 1]:
-                print(f'{nums[j]} is > than {nums[j + 1]}')
-                print(f'swapping {nums[j]} and {nums[j + 1]}')
-                print('list BEFORE swap: ', nums)
-                swap(nums, j, j + 1)
-                print('list AFTER swap: ', nums)
-    return nums
-    
-# print(bubble_sort([2, 4, 1, 5, 3, 7]))
-print(bubble_sort([8, 4, 3, 4, 1]))
+def swap(lst, idx1, idx2):
+    lst[idx1], lst[idx2] = lst[idx2], lst[idx1]
 
-# Time: O(n^2) -> n iterations for outer loop in worst case, n - 1 iterations for inner loop in worst case
+def bubble_sort(lst):
+    N = len(lst)
+    flag = False
 
-# Space: O(1) b/c no new DS or memory was used. We modified the input list in-place
+    for i in range(N): # num of sorted elts
+        for j in range(N - i - 1):
+            if lst[j] > lst[j + 1]:
+                swap(lst, j, j + 1)
+                flag = True
+        if not flag:
+            break
 
-# Stability: Stable sort. Order of identical entries is PRESERVED
 
-# In-Place? List is sorted by moving elements within the list
+        
+
+lst = [10, 9, 8, 7]
+bubble_sort(lst)
+print(lst)
