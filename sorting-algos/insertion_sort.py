@@ -1,5 +1,4 @@
 
-
 def insertion_sort(lst):
     N = len(lst)
     currElt = 0
