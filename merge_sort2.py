@@ -1,8 +1,7 @@
 
 def merge_sort(lst):
     N = len(lst)
-    i = 0
-
+    
     if N > 1:
         left_sub = lst[0:(N // 2)]
         right_sub = lst[(N // 2):]
